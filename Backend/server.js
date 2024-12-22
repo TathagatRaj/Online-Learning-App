@@ -1,15 +1,20 @@
+const PropertiesReader = require('properties-reader');
+const properties = PropertiesReader('config.properties');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = properties.get('PORT') || 5000;  // take port from properties file
 
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/mean-login', {
+const MONGO_URI = `mongodb://${properties.get('DB_HOST')}:${properties.get('DB_PORT')}/${properties.get('DB_NAME')}`;
+
+mongoose.connect(MONGO_URI, {  // take from properties file
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -41,5 +46,9 @@ app.post('/api/login', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);    
 });
+
+// include unit test
+// configure local host
+// create readme 
