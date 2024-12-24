@@ -1,5 +1,8 @@
 body {
     background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    height: 100vh;
 }
 
 #LoginPanel {

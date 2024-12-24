@@ -5,10 +5,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = properties.get('PORT') || 5000;  // take port from properties file
 
+app.use(express.static(path.join(__dirname, '../FrontEnd')));
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -28,10 +30,12 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+// Endpoint to handle login
 app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
+        // Find user by email and password
         const user = await User.findOne({ email, password });
 
         if (user) {
@@ -45,10 +49,15 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../FrontEnd', 'LearningApp.html'));  // Adjust the file path accordingly
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);    
 });
 
+module.exports = app;
 // include unit test
 // configure local host
 // create readme 

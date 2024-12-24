@@ -1,4 +1,3 @@
-
 const app = angular.module('LoginApp', []);
 
 app.controller('LoginController', function ($scope, $http) {
@@ -10,7 +9,8 @@ app.controller('LoginController', function ($scope, $http) {
             password: $scope.loginPass
         };
 
-        $http.post('http://localhost:3000/api/login', loginData)
+        // Send POST request to the backend API for login
+        $http.post('http://localhost:5000/api/login', loginData)
             .then(response => {
                 alert(response.data.message); 
             })

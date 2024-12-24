@@ -19,11 +19,11 @@
                 <form name="myForm" ng-submit="Login($event)" novalidate>
                     <div class="mb-3">
                         <input type="email" class="form-control" id="LoginEmail" name="loginEmail" ng-required="true"
-                            ng-model="loginEmail" placeholder="Email address">
+                            ng-model="loginEmail" placeholder="Email address" required="required">
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" id="LoginPass" name="loginPass" ng-required="true"
-                            ng-model="loginPass" placeholder="Password">
+                            ng-model="loginPass" placeholder="Password" required="required">
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary" id="LogInBtn">Log in</button>
@@ -32,7 +32,8 @@
             </div>
         </div>
     </div>
-    <script src="../FrontEnd/Js/app.js"></script>
+    <script src="Js/app.js"></script>
 </body>
 
 </html>
+
